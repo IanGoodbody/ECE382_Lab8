@@ -5,8 +5,13 @@
 
 Most of the pre-lab work for this project was tackeled in that of lab 7. It included the hardware layout which was used
 in this lab, as well as a basic left wall following algorithm. Specific values for the sensor readings could be 
-approximated from the calibration preformed in that lab aswell. The only challenge here was to implement and calibrate
-a functioning moving algorithm
+approximated from the calibration preformed in that lab aswell. A basic flowchart (admittantly created for lab 7) 
+outlining a basic wall following algorithm is shown below in addition to the wiring diagram used both for this lab 
+and lab 78.
+
+![alt text](https://raw.githubusercontent.com/IanGoodbody/ECE382_Lab8/master/L_Wall_Follow.jpg)
+
+![alt text](https://raw.githubusercontent.com/IanGoodbody/ECE382_Lab7/master/IR_Wiring.jpg)
 
 ## Lab Implementation
 
@@ -58,7 +63,23 @@ prevented the signal interference impeding on the robot's progress.
 
 Up until this point the robot would stop once it reached a wall. However, the arking motion often caused the robot 
 to loop around, hit a wall and stop. The right turn was then designed to adapt to these wall collisions. If the robot 
-does not see a left turn and subsequently runs into a wall , it means that a right turn *might* be available. The robot then makes a 90 degree right tank turn, sees if the coast is clear, then continues moving forward.
+does not see a left turn and subsequently runs into a wall , it means that a right turn *might* be available. The 
+robot then makes a 90 degree right tank turn (wheels move in opposite directions), sees if the coast is clear, then
+continues moving forward.
 
 Without using the right sensor and just the left wall and right turn functions, the robot was able to make one brief
-(and undocumented) complete run through the a functionality maze. 
+(and undocumented) complete run through the a functionality maze.
+
+##### Achieving Certifiable A Functionality
+
+After various steps calibrating the wheel duty cycles and movement times for each turn, it was realized that slowing 
+down/shortening the runtime variable for routine moves would add robustness to the code and stability to the robot's
+movement by sampling the sensors more often. This ended up being the key to stable A functionality as the robot became
+less likely to run into a wall before sampling. 
+
+The robot was only able to complete the maze in one direction. My best guess is that the shadows and lighting changed 
+betwixt the two directions and that was complicating the sensor readings.
+
+#### Documentation
+
+C2C Park indicated that pauses between sensor reads helped cut down on interference between each read.
