@@ -5,6 +5,8 @@
 
 /*
  * main.c
+ * Author: Ian R Goodbody
+ * Function: Implements maze navigation
  */
 void main(void)
 {
@@ -97,3 +99,4 @@ void main(void)
     	waitMiliseconds(runTime);
     }
 }
+// Merry Christmas Captain Trimble!
