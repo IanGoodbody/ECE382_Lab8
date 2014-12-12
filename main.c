@@ -53,11 +53,11 @@ void main(void)
     	lMedian = median(lBuffer);
     	rMedian = median(rBuffer);
 
-    	if(fMedian < 0x0200) // Crash into wall test; ~2.5 inch threshold
+    	if(fMedian < 0x01F0) // Crash into wall test; ~2.5 inch threshold
     	{
     		if(lMedian < 0x01FF) // Thar be nothin' off the port side captain! > 5 in
     		{// Commence conrner rounding turn
-    			lWheelSpeed = 2300;
+    			lWheelSpeed = 2600;
     			rWheelSpeed = 5000;
     		}
     		else if(lMedian < 0x0266) // Captain! We are getting into unmapped waters best bring land back in sight
@@ -89,9 +89,9 @@ void main(void)
     	{
     		// Land is coming up fast captain. Hard turn to starboard
     		P1OUT |= RIGHT_LED|LEFT_LED;
-    		setLeftWheel(5090,FORWARD);
+    		setLeftWheel(5080,FORWARD);
     		setRightWheel(5260, BACKWARD);
-    		runTime = 460;
+    		runTime = 450;
     	}
     	go();
     	waitMiliseconds(runTime);
