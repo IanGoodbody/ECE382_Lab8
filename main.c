@@ -18,7 +18,7 @@ void main(void)
     P1OUT &= ~(LEFT_LED|RIGHT_LED);
 
 
-    int fBuffer[BUFFER_LN];
+    int fBuffer[BUFFER_LN]; // Code probably unnecessary but it cannot hurt
     int lBuffer[BUFFER_LN];
     int rBuffer[BUFFER_LN];
 
@@ -37,7 +37,7 @@ void main(void)
     while(1)
     {
 
-        P1OUT &= ~(LEFT_LED|RIGHT_LED);
+        P1OUT &= ~(LEFT_LED|RIGHT_LED); // turn off LEDs
     	stop();
 
     	for (i = BUFFER_LN; i > 0; i--)
@@ -55,26 +55,26 @@ void main(void)
 
     	if(fMedian < 0x01F0) // Crash into wall test; ~2.5 inch threshold
     	{
-    		if(lMedian < 0x01FF) // Thar be nothin' off the port side captain! > 5 in
-    		{// Commence conrner rounding turn
+    		if(lMedian < 0x01FF) // There is no wall remotely close to the left side, 
+    		{                    // Initiate sweeping turn
     			lWheelSpeed = 2600;
     			rWheelSpeed = 5000;
     		}
-    		else if(lMedian < 0x0266) // Captain! We are getting into unmapped waters best bring land back in sight
+    		else if(lMedian < 0x0266) // Getting too far from the wall start turning in
     		{
-    			P1OUT |= LEFT_LED;
+    			P1OUT |= LEFT_LED; // Red LED on, green off
     			P1OUT &= ~RIGHT_LED;
     			rWheelSpeed = 4270;
     			lWheelSpeed = 4040;
     		}
-    		else if(lMedian > 0x02E4) // Yar! Land ho off the port side captain we are goint to hit it
+    		else if(lMedian > 0x02E4) // Getting too close to the wall start turning out
     		{
-    			P1OUT |= RIGHT_LED;
+    			P1OUT |= RIGHT_LED; // Green LED on, red off
     			P1OUT &= ~LEFT_LED;
     			rWheelSpeed = 3900;
     			lWheelSpeed = 4040;
     		}
-    		else // Clear waters ahead sir, looks like smooth sailing
+    		else // Acceptable distance from wall, cruise forward normally
     		{
     			//P1OUT |= RIGHT_LED;
     			P1OUT &= ~(RIGHT_LED|LEFT_LED);
@@ -87,7 +87,7 @@ void main(void)
     	}
     	else
     	{
-    		// Land is coming up fast captain. Hard turn to starboard
+    		// About to run into a wall, initiate hard right turn
     		P1OUT |= RIGHT_LED|LEFT_LED;
     		setLeftWheel(5080,FORWARD);
     		setRightWheel(5260, BACKWARD);
